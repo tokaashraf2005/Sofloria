@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Sofloria</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-page">
+
+  <!-- Login Form -->
+  <div class="login-wrapper">
+    <form method="POST" action="{{ url_for('login') }}" id="loginForm">
+      <h1>Login</h1>
+
+      <!-- Username Input -->
+      <div class="login-form-input-box">
+        <input type="text" name="username" id="username" placeholder="Username" required>
+        <i class='bx bxs-user'></i>
+      </div>
+
+      <!-- Password Input -->
+      <div class="login-form-input-box">
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+
+      <!-- Remember Me and Forgot Password -->
+      <div class="login-form-remember-forgot">
+        <label><input type="checkbox" name="remember" id="rememberMe"> Remember me</label>
+        <a href="#" id="forgetPasswordLink">Forget password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="login-form-btn">Login</button>
+
+      <div class="login-form-register-link">
+        <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up Here</a></p>
+      </div>
+    </form>
+  </div>
+
+  <!-- Forget Password Popup -->
+  <div id="forgetPasswordPopup" style="display: none;">
+    <h3>Reset Password</h3>
+    <p>Please enter your email to reset your password.</p>
+    <input type="email" id="resetEmail" placeholder="Enter your email">
+    <button id="resetButton">Reset</button>
+    <button id="closePopup">Close</button>
+    <p id="emailError" style="color: red; display: none;">❌ Please enter a valid email with "@" symbol.</p>
+  </div>
+  
+  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

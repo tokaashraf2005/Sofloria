@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Sofloria</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <div class="announcement">
+    Free samples on all orders above 850 EGP in Cairo & Alexandria
+  </div>
+
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">Sofloria</a>
+      <ul class="nav-links">
+        <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="/product"><i class="fas fa-box-open"></i> Products</a></li>
+        <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="/cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+        {% if username %}
+            <li><a href="#"><i class="fas fa-user"></i> Hi! {{ username }}</a></li>
+            <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        {% else %}
+            <li><a href="/login"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
+        {% endif %}
+      </ul>
+  
+      <!-- Search Bar -->
+      <form action="/search" method="GET" class="search-bar">
+        <input 
+          type="text" 
+          name="query" 
+          placeholder="Search for products..." 
+          aria-label="Search"
+          required>
+        <button type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Slideshow -->
+<div class="slideshow-container">
+  <div class="slide fade" onclick="goToProducts()">
+    <img src="https://sourcebeauty.com/cdn/shop/files/December-Main-Banner-03.webp?v=1733658700" alt="Slide 1">
+  </div>
+  <div class="slide fade" onclick="goToProducts()">
+    <img src="https://sourcebeauty.com/cdn/shop/files/offers-banner.webp?v=1734528299" alt="Slide 2">
+  </div>
+  <a class="prev" onclick="moveSlides(-1)">&#10094;</a>
+  <a class="next" onclick="moveSlides(1)">&#10095;</a>
+</div>
+
+  <header class="header">
+    <h1>Our Bestsellers</h1>
+    <p>Uncover our exclusive bestsellers of top-tier products</p>
+  </header>
+
+  <main class="container">
+    <div class="product-carousel">
+      <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">&#10094;</button>
+      <div class="product-container">
+        {% for product in best_seller_products %}
+        <a href="/product/{{ product.id }}" class="product-card">
+          <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <p class="price">{{ product.Price }}</p>
+          <div class="product-actions">
+            <button class="add-to-cart-btn" 
+                data-product-id="{{ product.id }}"
+                data-product-name="{{ product.name }}"
+                data-product-price="{{ product.Price }}"
+                data-product-image="{{ product.image }}">
+            Add to Cart
+        </button>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      <button class="carousel-btn next-btn" onclick="moveCarousel(1)">&#10095;</button>
+    </div>
+  </main>
+
+  <!-- Ads Section -->
+  <div class="ads-container">
+    <div class="ad" onclick="goToProducts()">
+      <img src="https://sourcebeauty.com/cdn/shop/files/iNatural-New-Arrival-Sponsored-Brand-Banner_2000x.jpg?v=1733752504" alt="Ad 1">
+    </div>
+    <div class="ad" onclick="goToProducts()">
+      <img src="https://sourcebeauty.com/cdn/shop/files/Revox-Brand-Banner-Dec-EN_2000x.jpg?v=1733752502" alt="Ad 2">
+    </div>
+  </div>
+</main>
+
+<section class="recently-viewed">
+  <h2 class="section-title">Recently Viewed Products</h2>
+  <div class="recently-viewed-container">
+    <div class="product-container">
+      {% if viewed_products %}
+      {% for product in best_seller_products %}
+      <a href="/product/{{ product.id }}" class="product-card">
+          <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <p class="price">{{ product.price }}</p>
+          <div class="product-actions">
+              <button class="add-to-cart-btn" 
+                  data-product-id="{{ product.id }}"
+                  data-product-name="{{ product.name }}"
+                  data-product-price="{{ product.price }}"
+                  data-product-image="{{ product.image }}"> 
+              Add to Cart
+              </button>
+          </div>
+      </a>
+      {% endfor %}
+      {% else %}
+        <div class="message-text">
+          <p>You haven't explored any products yet. Start discovering our amazing range of items and check back here to see your recently viewed products!</p>
+          <a href="/product" class="shop-now-link">Shop Now</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section> 
+
+<!-- Customer Reviews Section -->
+<section class="customer-reviews">
+  <div class="container">
+      <h2 class="section-title">What Our Customers Say</h2>
+      <div class="row">
+          {% for review in customer_reviews %}
+          <div class="col-md-4">
+              <div class="review-card">
+                  <!-- Reviewer Avatar -->
+                  <img src="{{ review.avatar_url }}" alt="Avatar of {{ review.name }}" class="reviewer-avatar">
+                  <!-- Review Content -->
+                  <p class="review-text">"{{ review.comment }}"</p>
+                  <h5 class="reviewer-name">{{ review.name }}</h5>
+                  <!-- Star Rating -->
+                  <div class="review-rating">
+                      {% for _ in range(review.rating) %}
+                      <span class="star">★</span>
+                      {% endfor %}
+                      {% for _ in range(5 - review.rating) %}
+                      <span class="star empty">☆</span>
+                      {% endfor %}
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</section>
+
+  <footer>
+    <p>&copy; 2024 Sofloria Store. All rights reserved.</p>
+  </footer>
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

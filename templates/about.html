@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Sofloria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <div class="announcement">
+        Free samples on all orders above 850 EGP in Cairo & Alexandria
+      </div>
+    
+      <nav class="navbar">
+        <div class="container">
+          <a href="#" class="logo">Sofloria</a>
+          <ul class="nav-links">
+            <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="/product"><i class="fas fa-box-open"></i> Products</a></li>
+            <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="/cart"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+            {% if username %}
+                <li><a href="#"><i class="fas fa-user"></i> Hi! {{ username }}</a></li>
+                <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            {% else %}
+                <li><a href="/login"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
+            {% endif %}
+          </ul>
+      
+          <!-- Search Bar -->
+          <form action="/search" method="GET" class="search-bar">
+            <input 
+              type="text" 
+              name="query" 
+              placeholder="Search for products..." 
+              aria-label="Search"
+              required>
+            <button type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </nav>
+
+<header class="about-header">
+    <h1>About Sofloria</h1>
+</header>
+
+<main class="about-main">
+            <!-- About Us Section -->
+            <section class="about-section">
+                <div class="about-intro">
+                    <h2>Our Story</h2>
+                    <p>Sofloria isn’t just your link to a range of impeccable and diverse local products produced by highly qualified beauty experts, but it’s also an opportunity for you to broaden your horizons and simply feel great about yourself.</p>
+                    <p>In 2016, Sofloria began its journey as a blog that simplified the often-intimidating beauty world. A couple of years later, in 2018, Sofloria transitioned and became the first Egyptian beauty e-commerce company, focusing on local and price-friendly products for all of your beauty needs. Our platform features over 90 brands, and over 3,500 products, making Sofloria a go-to in the Egyptian beauty industry.</p>
+                </div>
+    
+                <div class="about-values">
+                    <h2>Our Ethos</h2>
+                    <p>The main ethos of Sofloria is to inspire the everyday Egyptian woman and encourage her to elevate her life and make the right beauty choices. Not only does Sofloria cater to the average Egyptian woman, but it’s also led by women with expertise in the ins and outs of the beauty world.</p>
+                    <p>Our platform aims to help women choose local alternatives to their self-care routines and source out the region’s best products.</p>
+                </div>
+    
+                <div class="about-team">
+                    <h2>Our Team</h2>
+                    <p>Our team is passionate about helping you find the right products for your beauty needs, supporting local brands, and ensuring that you have the best possible shopping experience.</p>
+                </div>
+    
+                <div class="about-brands">
+                    <h2>Our Partners</h2>
+                    <p>We primarily work with local brands that deliver fresh and innovative products, giving them a platform to become the next best thing. We also collaborate with selected international brands who locally source and manufacture many of their products.</p>
+                </div>
+    
+                <div class="about-contact">
+                    <h2>Contact Us</h2>
+                    <p>If you face any problem or would like to add any comments to improve your experience, <strong>Contact us</strong> via this email: 
+                        <a href="mailto:WeJustGirles@gmail.com"><strong>WeJustGirles@gmail.com</strong></a>. Thank you!</p>
+                </div>
+            </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Sofloria Store. All rights reserved.</p>
+</footer>
+</body>
+</html>
