@@ -2,7 +2,7 @@
 
 Sofloria is a web-based skincare products e-commerce platform built using Flask. It provides users with an intuitive online shopping experience, allowing them to browse and purchase skincare products easily.
 
-![Sofloria Homepage](![screenshotshomepage png](https://github.com/user-attachments/assets/c97aeb54-bae5-44ed-9609-c19c18220ed9)
+[Sofloria Homepage]([screenshotshomepage png](https://github.com/user-attachments/assets/c97aeb54-bae5-44ed-9609-c19c18220ed9)
 )
 ![Sofloria Login Page](![screenshotsloginpage png](https://github.com/user-attachments/assets/b2e6dd7b-3752-4cdc-bd91-de2ea513ebef)
 )
