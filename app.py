@@ -219,10 +219,7 @@ products_details = [
     "content":"This revolutionary tinted oil-to-gloss from Godly Pride provides a soft, long-lasting layer of hydration while imparting a subtle, customizable hue for a natural look, it incredibly moisturizes the lips with its blend of oils."},
 ]
 
-# Store users in a simple dictionary
-# Format: {"username": {"password": "password"}}
 users = {} 
-# List to store user data
 user_data = []
 
 # Track viewed products in the session
@@ -272,13 +269,11 @@ def signup():
         password = data.get("password")
         confirm_password = data.get("confirm_password")
 
-        # Server-side validations
         if not username or not username.isalpha():
             return jsonify(success=False, message="Invalid username. Use letters only.")
         if not email or "@" not in email:
             return jsonify(success=False, message="Invalid email. Must contain '@'.")
-        
-        # Enhanced password validation
+            
         import re
         password_regex = re.compile(r"^(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,}$")
         if not password or not password_regex.match(password):
@@ -359,7 +354,6 @@ def rate_product(product_id):
     if not rating or not (1 <= rating <= 5):
         return jsonify({"error": "Invalid rating"}), 400
 
-    # يمكنك هنا حفظ التقييم في قاعدة البيانات
     print(f"Received rating {rating} for product {product_id}")
 
     return jsonify({"message": "Rating submitted successfully!"})
@@ -423,7 +417,6 @@ def cart():
     cart = session.get("cart", [])
     return render_template("cart.html", cart=cart, best_seller_products=best_seller_products, products=products, products_details =products_details)
 
-# الحصول على عدد المنتجات في السلة 
 @app.route("/cart-count", methods=["GET"]) 
 def cart_count(): 
     cart = session.get("cart", []) 
